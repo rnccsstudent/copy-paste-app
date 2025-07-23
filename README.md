@@ -12,7 +12,7 @@ A minimalistic, fast, and simple web app to copy, save, view, download, and dele
 
 **Backend**: Deployed on PythonAnywhere  
 
-**API Base URL**: `https://pranabmahata.pythonanywhere.com`
+**API Base URL**: `https://pranabmahata.pythonanywhere.com` create your own
 
 ---
 
