@@ -7,8 +7,11 @@ A minimalistic, fast, and simple web app to copy, save, view, download, and dele
 ## 🔗 Live URL
 
 [*Click me*](https://copy-paste-pranab.netlify.app/)
+
 **Frontend**: Deployed on Netlify  
+
 **Backend**: Deployed on PythonAnywhere  
+
 **API Base URL**: `https://pranabmahata.pythonanywhere.com`
 
 ---
