@@ -1,8 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS so your frontend on Netlify can access this API
+CORS(app)  # Allow frontend requests
 
 @app.route("/save", methods=["POST"])
 def save_text():
@@ -14,12 +14,10 @@ def save_text():
     if not text:
         return jsonify({"message": "Empty text!"}), 400
 
-    try:
-        with open("01.txt", "a", encoding="utf-8") as f:
-            f.write(text + "\n")
-        return jsonify({"message": "Saved successfully!"}), 200
-    except Exception as e:
-        return jsonify({"message": f"Failed to save text: {str(e)}"}), 500
+    response = make_response(text)
+    response.headers.set("Content-Type", "text/plain")
+    response.headers.set("Content-Disposition", "attachment", filename="copied.txt")
+    return response
 
 @app.route("/")
 def home():
