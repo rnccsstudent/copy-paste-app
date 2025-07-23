@@ -1,19 +1,20 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Allow access from frontend (Netlify)
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    message = ""
-    if request.method == "POST":
-        text = request.form["text"]
-        if text.strip():
-            with open("01.txt", "a", encoding="utf-8") as f:
-                f.write(text.strip() + "\n")
-            message = "Copied and saved successfully!"
-        else:
-            message = "Text cannot be empty."
-    return render_template("index.html", message=message)
+@app.route("/save", methods=["POST"])
+def save_text():
+    data = request.json
+    text = data.get("text", "").strip()
+    if text:
+        with open("01.txt", "a", encoding="utf-8") as f:
+            f.write(text + "\n")
+        return {"message": "Saved successfully!"}
+    return {"message": "Empty text!"}, 400
 
-if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+@app.route("/")
+def home():
+    return "API running"
+
